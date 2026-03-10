@@ -20,8 +20,19 @@ def download():
     filename = str(uuid.uuid4()) + ".mp4"
 
     ydl_opts = {
-        'format': 'best',
-        'outtmpl': filename
+        "format": "best",
+        "outtmpl": filename,
+        "noplaylist": True,
+        "quiet": True,
+        "geo_bypass": True,
+        "nocheckcertificate": True,
+
+        # This bypasses the YouTube bot check
+        "extractor_args": {
+            "youtube": {
+                "player_client": ["android"]
+            }
+        }
     }
 
     try:
@@ -38,4 +49,3 @@ def download():
             os.remove(filename)
 
 app.run(host="0.0.0.0", port=10000)
-
